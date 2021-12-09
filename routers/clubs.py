@@ -17,6 +17,11 @@ def create_club(club: ClubWrite):
     return db.create_club(club.dict())
 
 
+@router.get('/api/clubs/{club_id}/', response_model=Club, tags=["clubs"], status_code=200)
+def read_club(club_id: str):
+    return db.get_club(club_id)
+
+
 @router.patch('/api/clubs/{club_id}/', response_model=Club, tags=["clubs"], status_code=200)
 def update_club(club_id: str, club: ClubWrite):
     if not club_id == club.id:

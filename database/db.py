@@ -11,6 +11,16 @@ def get_all() -> dict:
         return json.load(file)
 
 
+def get_club(club_id) -> dict:
+    clubs = get_all()
+    try:
+        current_club = next(filter(lambda x: x['id'] == club_id, clubs['clubs']))
+    except StopIteration:
+        raise None
+    else:
+        return current_club
+
+
 def create_club(club: dict) -> dict:
     clubs: dict = get_all()
     club['id'] = uuid.uuid4().hex
